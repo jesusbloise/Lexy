@@ -2,17 +2,15 @@ import requests
 from app import app
 from flask import jsonify
 
-BASE_URL = "https://jsonplaceholder.typicode.com"  # URL base de la API pública
+BASE_URL = "https://jsonplaceholder.typicode.com"  
 
 @app.route('/posts', methods=['GET'])
 def get_posts():
     try:
-        # Realizando la solicitud GET a la API externa
         response = requests.get(f"{BASE_URL}/posts")
-        response.raise_for_status()  # Verifica si la solicitud fue exitosa
-        return jsonify(response.json())  # Devuelve la respuesta en formato JSON
+        response.raise_for_status()  
+        return jsonify(response.json())  
     except requests.exceptions.RequestException as e:
-        # En caso de error, muestra el mensaje de error
         return jsonify({"error": str(e)}), 500
 
 @app.route('/comments', methods=['GET'])
